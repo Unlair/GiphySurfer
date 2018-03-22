@@ -1,0 +1,38 @@
+.search-bar {
+    text-align: center;
+}
+
+.paper {
+    width: 1000px !important;
+    height: 100px !important;
+    margin: 20px !important;
+    text-align: center !important;
+    display: inline-block !important;
+}
+
+.text-field {
+    margin-top: 15px !important;
+    width: 600px !important;
+}
+
+.slider-group {
+    display: flex !important;
+    margin: 5px auto !important;
+    width: 500px !important;
+    height: 20px !important;
+}
+
+.slider-group > p {
+    margin: 0 0 0 10px !important;
+}
+
+.slider {
+    width: 200px !important;
+    margin: 0 !important;
+}
+
+.slider > div {
+    width: 200px !important;
+    margin: 0 !important;
+}
+
