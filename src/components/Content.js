@@ -8,21 +8,20 @@ class Content extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showModal: false,
+            selected: false,
         };
         this.renderModal = this.renderModal.bind(this);
     }
 
-    renderModal = () => this.setState({showModal: true,});
+    renderModal = () => this.setState({selected: true});
 
-    closeModal = () => this.setState({showModal: false});
+    closeModal = () => this.setState({selected: undefined});
 
     renderList = (data) => {
         return data.map((pic) => {
             return (
                 <div key={pic.id} className="gif-single">
-                    <img alt="gif" src={pic.url} onClick={this.renderModal}/>
-                    {this.state.showModal ? <MuiThemeProvider><Modal onClose={this.closeModal}/></MuiThemeProvider> : undefined}
+                    <img alt="gif" src={pic.url} onClick={() => this.setState({selected: pic})}/>
                 </div>
             )
         })
@@ -32,6 +31,8 @@ class Content extends Component {
         return (
             <div className="Content">
                 {this.renderList(this.props.data)}
+                {this.state.selected ? <MuiThemeProvider><Modal onClose={this.closeModal}
+                                                                data={this.state.selected}/></MuiThemeProvider> : undefined}
             </div>
         )
     }

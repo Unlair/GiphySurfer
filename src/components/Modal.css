@@ -1,0 +1,20 @@
+.dialog h3 {
+    text-align: center;
+}
+
+.dialog .p-img {
+    text-align: center;
+}
+
+.dialog .p-url {
+    text-align: center;
+}
+
+.dialog .p-rating {
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.dialog .p-date {
+    text-align: center;
+}

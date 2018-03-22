@@ -1,36 +1,31 @@
 import React, {Component} from 'react';
+import './Modal.css'
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
 export default class Modal extends Component {
-    handleClose = () => {
-        this.setState({open: false});
-    };
-
     render() {
         const actions = [
             <FlatButton
-                label="Cancel"
+                label="Ok"
                 primary={true}
-                onClick={this.handleClose}
-            />,
-            <FlatButton
-                label="Submit"
-                primary={true}
-                keyboardFocused={true}
-                onClick={this.handleClose}
+                onClick={this.props.onClose}
             />
         ];
 
         return (
             <Dialog
-                title="Dialog With Actions"
+                className="dialog"
+                title="Details"
                 actions={actions}
                 modal={false}
                 open={true}
                 onRequestClose={this.props.onClose}
             >
-                The actions in this window were passed in as an array of React objects.
+                <p className="p-img"><img alt="gifModal" src={this.props.data.url}/></p>
+                <p className="p-url">URL: {this.props.data.url}</p>
+                <p className="p-rating"> Rating: {this.props.data.rating}</p>
+                <p className="p-date">Date: {this.props.data.date}</p>
             </Dialog>
         );
     }

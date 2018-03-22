@@ -17,6 +17,7 @@
         flex-wrap: wrap;
         flex-direction: row;
     }
+
     .gif-single {
         width: 50%;
         /*padding: 5px;*/

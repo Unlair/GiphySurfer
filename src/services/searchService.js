@@ -9,7 +9,12 @@ export default class SearchService {
                         response.json().then(function (data) {
                             console.log(data);
                             let gifList = data.data.map(function (pic) {
-                                return {id: pic.id, url: pic.images.downsized.url}
+                                return {
+                                    id: pic.id,
+                                    url: pic.images.downsized.url,
+                                    rating: pic.rating,
+                                    date: pic.import_datetime
+                                }
                             });
                             return resolve(gifList);
                         });

@@ -36,7 +36,7 @@ class SearchBar extends Component {
                             onChange={this.handleSlider}
                         />
                         <p>
-                            <span>The value of this slider is: </span>
+                            <span>Number of GIFs: </span>
                             <span>{this.state.valueSlider}</span>
                         </p>
                     </div>
