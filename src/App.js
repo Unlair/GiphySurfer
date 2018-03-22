@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import debounce from 'lodash/debounce'
 import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import SearchBar from './components/SearchBar';
@@ -16,22 +17,24 @@ class App extends Component {
 
     updateText = (value) => {
         this.setState({valueText: value});
-        console.log(this.state)
     };
 
     updateSlider = (value) => {
         this.setState({valueSlider: value});
-        console.log(this.state)
     };
 
-    componentWillUpdate (nextProps, nextState) {
+    method = debounce((nextState) => {
+        this.state.search.search(nextState.valueText, nextState.valueSlider)
+            .then((data) => {
+                this.setState({data});
+            })
+    }, 500);
+
+    componentWillUpdate(nextProps, nextState) {
         if (this.state.valueText !== nextState.valueText || this.state.valueSlider !== nextState.valueSlider) {
             // это вынести в отдельный метод
             // сделать его debounce
-            this.state.search.search(nextState.valueText, nextState.valueSlider)
-                .then((data) => {
-                    this.setState({data});
-                })
+            this.method(nextState);
         }
     }
 
@@ -43,7 +46,7 @@ class App extends Component {
                         <SearchBar updateText={this.updateText} updateSlider={this.updateSlider}/>
                     </MuiThemeProvider>
                 </header>
-                <div className={"App-content"}>
+                <div className="App-content">
                     <Content data={this.state.data}/>
                 </div>
             </div>

@@ -14,14 +14,11 @@ class SearchBar extends Component {
         this.setState({valueText: value}, () => {
             this.props.updateText(this.state.valueText);
         });
-        // this.props.updateText(this.state.valueText);
-        console.log(this.state);
     };
 
     handleSlider = (event, value) => {
         this.setState({valueSlider: value});
         this.props.updateSlider(this.state.valueSlider);
-        console.log(this.state);
     };
 
     render() {

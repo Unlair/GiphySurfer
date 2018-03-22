@@ -1,0 +1,30 @@
+.App-content {
+    margin: auto;
+    max-width: 1200px;
+}
+
+.gif-single > img {
+    display: block;
+    max-width: 400px;
+    min-width: 400px;
+    max-height: 200px;
+    /*min-height: 200px;*/
+}
+
+@media screen and (min-width: 600px) {
+    .Content {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+    .gif-single {
+        width: 50%;
+        /*padding: 5px;*/
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .gif-single {
+        width: calc(100% / 3);
+    }
+}

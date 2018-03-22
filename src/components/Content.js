@@ -1,12 +1,28 @@
 import React, {Component} from 'react';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Modal from './Modal'
+import './Content.css'
 
 class Content extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            showModal: false,
+        };
+        this.renderModal = this.renderModal.bind(this);
+    }
+
+    renderModal = () => this.setState({showModal: true,});
+
+    closeModal = () => this.setState({showModal: false});
+
     renderList = (data) => {
-        return data.map(function (pic) {
+        return data.map((pic) => {
             return (
-                <div key={pic.id}>
-                    <img alt={"gif"} src={pic.url}/>
+                <div key={pic.id} className="gif-single">
+                    <img alt="gif" src={pic.url} onClick={this.renderModal}/>
+                    {this.state.showModal ? <MuiThemeProvider><Modal onClose={this.closeModal}/></MuiThemeProvider> : undefined}
                 </div>
             )
         })
@@ -14,7 +30,7 @@ class Content extends Component {
 
     render() {
         return (
-            <div className={"Content"}>
+            <div className="Content">
                 {this.renderList(this.props.data)}
             </div>
         )
@@ -22,55 +38,3 @@ class Content extends Component {
 }
 
 export default Content;
-
-
-// function () {
-//     this.state.search.search('cat','10')
-//         .then((data) =>{
-//             let gifList = data.map(function (pic) {
-//                         return (
-//                             <div key={pic.id}>
-//                                 <img alt={"hui"} src={pic.url}/>
-//                             </div>
-//                         )
-//                     });
-//             self.setState({gifList: gifList});
-//         })
-// }
-
-
-// constructor() {
-//     super();
-//     this.state = {
-//         gifList: [],
-//     };
-//     this.create = this.create.bind(this);
-// }
-//
-// create() {
-//
-//     let self = this;
-//     let myValue = 'agnez';
-//     let limit = '25';
-//
-//     fetch('http://api.giphy.com/v1/gifs/search?q=' + myValue + '&api_key=wZ7TY2vuJXe9lk8ngjHNI2dkpwAssmEU&limit=' + limit)
-//         .then(
-//             function (response) {
-//                 response.json().then(function (data) {
-//                     console.log(data);
-//                     let gifList = data.data.map(function (pic) {
-//                         return (
-//                             <div key={pic.id}>
-//                                 <img alt={"hui"} src={pic.images.downsized.url}/>
-//                             </div>
-//                         )
-//                     });
-//                     console.log(gifList);
-//                     self.setState({gifList: gifList});
-//                 });
-//             }
-//         )
-//         .catch(function (err) {
-//             console.log('Fetch Error :-S', err);
-//         });
-// }

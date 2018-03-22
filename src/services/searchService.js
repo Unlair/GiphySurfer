@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default class SearchService {
 
     search(searchValue, limit) {
