@@ -21,7 +21,7 @@ class Content extends Component {
         return data.map((pic) => {
             return (
                 <div key={pic.id} className="gif-single">
-                    <img alt="gif" src={pic.url} onClick={() => this.setState({selected: pic})}/>
+                    <img alt="gif" src={pic.thumbnail} onClick={() => this.setState({selected: pic})}/>
                 </div>
             )
         })
@@ -30,7 +30,7 @@ class Content extends Component {
     render() {
         return (
             <div className="Content">
-                {this.renderList(this.props.data)}
+                {this.props.data.length ? this.renderList(this.props.data) : <p>No items!</p>}
                 {this.state.selected ? <MuiThemeProvider><Modal onClose={this.closeModal}
                                                                 data={this.state.selected}/></MuiThemeProvider> : undefined}
             </div>

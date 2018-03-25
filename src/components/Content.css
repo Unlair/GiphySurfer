@@ -1,6 +1,10 @@
 .App-content {
-    margin: auto;
-    max-width: 1200px;
+    margin: 20px auto;
+    max-width: 90%;
+}
+
+.App-content p {
+    margin: 0 auto;
 }
 
 .gif-single > img {
@@ -8,7 +12,7 @@
     max-width: 400px;
     min-width: 400px;
     max-height: 200px;
-    /*min-height: 200px;*/
+    margin: 15px auto;
 }
 
 @media screen and (min-width: 600px) {
@@ -20,12 +24,36 @@
 
     .gif-single {
         width: 50%;
-        /*padding: 5px;*/
     }
 }
 
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 1700px) {
+    .gif-single {
+        width: calc(100% / 4);
+    }
+}
+
+@media screen and (min-width: 1366px) and (max-width: 1700px) {
     .gif-single {
         width: calc(100% / 3);
+    }
+}
+
+@media screen and (min-width: 950px) and (max-width: 1366px) {
+    .gif-single {
+        width: calc(100% / 2);
+    }
+}
+
+@media screen and (min-width: 450px) and (max-width: 950px) {
+    .gif-single {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 150px) and (max-width: 450px) {
+    .gif-single > img {
+        min-width: 200px;
+        max-width: 200px;
     }
 }

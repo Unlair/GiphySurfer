@@ -11,20 +11,15 @@ class App extends Component {
     state = {
         search: new SearchService(),
         data: [],
-        valueText: '',
-        valueSlider: 20,
+        valueText: ''
     };
 
     updateText = (value) => {
         this.setState({valueText: value});
     };
 
-    updateSlider = (value) => {
-        this.setState({valueSlider: value});
-    };
-
-    method = debounce((nextState) => {
-        this.state.search.search(nextState.valueText, nextState.valueSlider)
+    performSearch = debounce((nextState) => {
+        this.state.search.search(nextState.valueText)
             .then((data) => {
                 this.setState({data});
             })
@@ -32,9 +27,7 @@ class App extends Component {
 
     componentWillUpdate(nextProps, nextState) {
         if (this.state.valueText !== nextState.valueText || this.state.valueSlider !== nextState.valueSlider) {
-            // это вынести в отдельный метод
-            // сделать его debounce
-            this.method(nextState);
+            this.performSearch(nextState);
         }
     }
 
