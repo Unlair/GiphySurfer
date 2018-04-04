@@ -4,56 +4,57 @@
 }
 
 .App-content p {
-    margin: 0 auto;
+    text-align: center;
+}
+
+.Content {
+    margin: auto;
 }
 
 .gif-single > img {
-    display: block;
-    max-width: 400px;
-    min-width: 400px;
-    max-height: 200px;
-    margin: 15px auto;
+    width: 300px;
+    margin: 0 2px;
 }
 
-@media screen and (min-width: 600px) {
-    .Content {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-    }
+/*@media screen and (min-width: 600px) {*/
+    /*.Content {*/
+        /*display: flex;*/
+        /*flex-wrap: wrap;*/
+        /*flex-direction: row;*/
+    /*}*/
 
-    .gif-single {
-        width: 50%;
-    }
-}
+    /*.gif-single {*/
+        /*width: 50%;*/
+    /*}*/
+/*}*/
 
-@media screen and (min-width: 1700px) {
-    .gif-single {
-        width: calc(100% / 4);
-    }
-}
+/*@media screen and (min-width: 1700px) {*/
+    /*.gif-single {*/
+        /*width: calc(100% / 4);*/
+    /*}*/
+/*}*/
 
-@media screen and (min-width: 1366px) and (max-width: 1700px) {
-    .gif-single {
-        width: calc(100% / 3);
-    }
-}
+/*@media screen and (min-width: 1366px) and (max-width: 1700px) {*/
+    /*.gif-single {*/
+        /*width: calc(100% / 3);*/
+    /*}*/
+/*}*/
 
-@media screen and (min-width: 950px) and (max-width: 1366px) {
-    .gif-single {
-        width: calc(100% / 2);
-    }
-}
+/*@media screen and (min-width: 950px) and (max-width: 1366px) {*/
+    /*.gif-single {*/
+        /*width: calc(100% / 2);*/
+    /*}*/
+/*}*/
 
-@media screen and (min-width: 450px) and (max-width: 950px) {
-    .gif-single {
-        width: 100%;
-    }
-}
+/*@media screen and (min-width: 450px) and (max-width: 950px) {*/
+    /*.gif-single {*/
+        /*width: 100%;*/
+    /*}*/
+/*}*/
 
-@media screen and (min-width: 150px) and (max-width: 450px) {
-    .gif-single > img {
-        min-width: 200px;
-        max-width: 200px;
-    }
-}
+/*@media screen and (min-width: 150px) and (max-width: 450px) {*/
+    /*.gif-single > img {*/
+        /*min-width: 200px;*/
+        /*max-width: 200px;*/
+    /*}*/
+/*}*/

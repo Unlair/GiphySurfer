@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Masonry from 'react-masonry-component';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Modal from './Modal'
 import './Content.css'
@@ -30,7 +31,7 @@ class Content extends Component {
     render() {
         return (
             <div className="Content">
-                {this.props.data.length ? this.renderList(this.props.data) : <p>No items!</p>}
+                {this.props.data.length ? <Masonry>{this.renderList(this.props.data)}</Masonry> : <p>No items!</p>}
                 {this.state.selected ? <MuiThemeProvider><Modal onClose={this.closeModal}
                                                                 data={this.state.selected}/></MuiThemeProvider> : undefined}
             </div>
