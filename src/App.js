@@ -22,37 +22,32 @@ class App extends Component {
         window.removeEventListener('scroll', this.onScroll, false);
     };
 
-    componentWillUpdate(nextProps, nextState) {
-        if (this.state.searchTerm !== nextState.searchTerm) {
-            this.setState({offset: 0});
-            this.performSearch(nextState);
+    onTextChange = debounce((_, searchTerm) => {
+        if (this.state.searchTerm !== searchTerm) {
+            this.setState({
+                searchTerm: searchTerm,
+                offset: 0,
+                data: [],
+            });
+            this.performSearch();
         }
-    }
+    }, 500);
 
-    onTextChange = (value) => {
-        this.setState({searchTerm: value});
+    performSearch = () => {
+        this.state.giphyService.fetchGifs(this.state.searchTerm, this.state.offset)
+            .then((data) => {
+                this.setState({
+                    data: this.state.data.concat(data),
+                });
+            });
     };
 
-    performSearch = debounce((nextState) => {
-        this.state.giphyService.fetchGifs(nextState.searchTerm, nextState.offset)
-            .then((data) => {
-                this.setState({data});
-            })
-    }, 500);
-
-    loadMore = debounce((text, offset) => {
-        this.state.giphyService.fetchGifs(text, offset)
-            .then((data) => {
-                this.setState({data: this.state.data.concat(data)});
-            })
-    }, 500);
-
-    onScroll = () => {
+    onScroll = debounce(() => {
         if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 1)) {
             this.setState({offset: this.state.offset + 30});
-            this.loadMore(this.state.searchTerm, this.state.offset);
+            this.performSearch(this.state.searchTerm, this.state.offset);
         }
-    };
+    }, 500);
 
     render() {
         return (

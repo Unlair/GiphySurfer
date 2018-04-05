@@ -5,7 +5,6 @@ import Modal from './Modal'
 import './Content.css'
 
 class Content extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
