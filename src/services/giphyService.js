@@ -3,9 +3,9 @@ export default class GiphyService {
         return new Promise((resolve) => {
             fetch('http://api.giphy.com/v1/gifs/search?q=' + searchValue + '&api_key=wZ7TY2vuJXe9lk8ngjHNI2dkpwAssmEU&limit=30&offset=' + offset)
                 .then(
-                    function (response) {
-                        response.json().then(function (data) {
-                            let gifList = data.data.map(function (pic) {
+                    (response) => {
+                        response.json().then((data) => {
+                            let gifList = data.data.map((pic) => {
                                 return {
                                     id: pic.id,
                                     preview: pic.images.preview_gif.url,
@@ -22,7 +22,7 @@ export default class GiphyService {
                         });
                     }
                 )
-                .catch(function (err) {
+                .catch((err) => {
                     console.log('Fetch Error :-S', err);
                 });
         })

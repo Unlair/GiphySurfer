@@ -24,7 +24,7 @@ class App extends Component {
 
     componentWillUpdate(nextProps, nextState) {
         if (this.state.valueText !== nextState.valueText) {
-            this.setState({offset:0});
+            this.setState({offset: 0});
             this.performSearch(nextState);
         }
     }
@@ -59,11 +59,11 @@ class App extends Component {
             <div className="App">
                 <header className="App-header">
                     <MuiThemeProvider>
-                        <SearchBar changeText={this.changeText}/>
+                        <SearchBar changeText={this.changeText} />
                     </MuiThemeProvider>
                 </header>
                 <div className="App-content">
-                    <Content data={this.state.data}/>
+                    <Content data={this.state.data} />
                 </div>
             </div>
         );

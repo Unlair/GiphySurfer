@@ -18,7 +18,7 @@ class SearchBar extends Component {
         return (
             <div className="search-bar">
                 <Paper className="paper" zDepth={1}>
-                    <TextField className="text-field" hintText="Hint Text" onChange={this.handleText}/>
+                    <TextField className="text-field" hintText="Hint Text" onChange={this.handleText} />
                 </Paper>
             </div>
         );
