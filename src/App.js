@@ -10,7 +10,7 @@ class App extends Component {
     state = {
         giphyService: new GiphyService(),
         data: [],
-        valueText: '',
+        searchTerm: '',
         offset: 0
     };
 
@@ -23,25 +23,25 @@ class App extends Component {
     };
 
     componentWillUpdate(nextProps, nextState) {
-        if (this.state.valueText !== nextState.valueText) {
+        if (this.state.searchTerm !== nextState.searchTerm) {
             this.setState({offset: 0});
             this.performSearch(nextState);
         }
     }
 
-    changeText = (value) => {
-        this.setState({valueText: value});
+    onTextChange = (value) => {
+        this.setState({searchTerm: value});
     };
 
     performSearch = debounce((nextState) => {
-        this.state.giphyService.request(nextState.valueText, nextState.offset)
+        this.state.giphyService.fetchGifs(nextState.searchTerm, nextState.offset)
             .then((data) => {
                 this.setState({data});
             })
     }, 500);
 
     loadMore = debounce((text, offset) => {
-        this.state.giphyService.request(text, offset)
+        this.state.giphyService.fetchGifs(text, offset)
             .then((data) => {
                 this.setState({data: this.state.data.concat(data)});
             })
@@ -50,7 +50,7 @@ class App extends Component {
     onScroll = () => {
         if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 1)) {
             this.setState({offset: this.state.offset + 30});
-            this.loadMore(this.state.valueText, this.state.offset);
+            this.loadMore(this.state.searchTerm, this.state.offset);
         }
     };
 
@@ -59,7 +59,7 @@ class App extends Component {
             <div className="App">
                 <header className="App-header">
                     <MuiThemeProvider>
-                        <SearchBar changeText={this.changeText} />
+                        <SearchBar onTextChange={this.onTextChange} />
                     </MuiThemeProvider>
                 </header>
                 <div className="App-content">

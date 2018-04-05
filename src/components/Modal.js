@@ -24,9 +24,9 @@ export default class Modal extends Component {
             >
                 <p className="p-img">
                     <img
-                    width={this.props.data.widthOriginal}
-                    height={this.props.data.heightOriginal}
-                    alt="gifModal" src={this.props.data.original}
+                        width={this.props.data.widthOriginal}
+                        height={this.props.data.heightOriginal}
+                        alt="gifModal" src={this.props.data.original}
                     />
                 </p>
                 <p className="p-url">URL: {this.props.data.original}</p>

@@ -5,12 +5,12 @@ import './SearchBar.css'
 
 class SearchBar extends Component {
     state = {
-        valueText: ''
+        searchTerm: ''
     };
 
-    handleText = (event, value) => {
-        this.setState({valueText: value}, () => {
-            this.props.changeText(this.state.valueText);
+    onTextChange = (event, value) => {
+        this.setState({searchTerm: value}, () => {
+            this.props.onTextChange(this.state.searchTerm);
         });
     };
 
@@ -18,7 +18,7 @@ class SearchBar extends Component {
         return (
             <div className="search-bar">
                 <Paper className="paper" zDepth={1}>
-                    <TextField className="text-field" hintText="Hint Text" onChange={this.handleText} />
+                    <TextField className="text-field" hintText="Hint Text" onChange={this.onTextChange}/>
                 </Paper>
             </div>
         );

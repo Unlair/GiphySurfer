@@ -1,7 +1,7 @@
 export default class GiphyService {
-    request(searchValue, offset) {
+    fetchGifs(searchTerm, offset) {
         return new Promise((resolve) => {
-            fetch('http://api.giphy.com/v1/gifs/search?q=' + searchValue + '&api_key=wZ7TY2vuJXe9lk8ngjHNI2dkpwAssmEU&limit=30&offset=' + offset)
+            fetch('http://api.giphy.com/v1/gifs/search?q=' + searchTerm + '&api_key=wZ7TY2vuJXe9lk8ngjHNI2dkpwAssmEU&limit=30&offset=' + offset)
                 .then(
                     (response) => {
                         response.json().then((data) => {
