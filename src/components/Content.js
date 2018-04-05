@@ -22,7 +22,7 @@ class Content extends Component {
         return data.map((pic) => {
             return (
                 <div key={pic.id} className="gif-single">
-                    <img alt="gif" src={pic.thumbnail} onClick={() => this.setState({selected: pic})}/>
+                    <img alt="gif" src={pic.preview} onClick={() => this.setState({selected: pic})}/>
                 </div>
             )
         })
@@ -32,8 +32,10 @@ class Content extends Component {
         return (
             <div className="Content">
                 {this.props.data.length ? <Masonry>{this.renderList(this.props.data)}</Masonry> : <p>No items!</p>}
-                {this.state.selected ? <MuiThemeProvider><Modal onClose={this.closeModal}
-                                                                data={this.state.selected}/></MuiThemeProvider> : undefined}
+                {this.state.selected ? <MuiThemeProvider><Modal
+                        onClose={this.closeModal}
+                        data={this.state.selected}
+                    /></MuiThemeProvider> : undefined}
             </div>
         )
     }

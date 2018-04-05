@@ -10,7 +10,7 @@ class SearchBar extends Component {
 
     handleText = (event, value) => {
         this.setState({valueText: value}, () => {
-            this.props.updateText(this.state.valueText);
+            this.props.changeText(this.state.valueText);
         });
     };
 

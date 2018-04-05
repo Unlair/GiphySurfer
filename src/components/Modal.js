@@ -23,10 +23,10 @@ export default class Modal extends Component {
                 onRequestClose={this.props.onClose}
             >
                 <p className="p-img"><img
-                    width={this.props.data.widthFull}
-                    height={this.props.data.heightFull}
-                    alt="gifModal" src={this.props.data.full}/></p>
-                <p className="p-url">URL: {this.props.data.full}</p>
+                    width={this.props.data.widthOriginal}
+                    height={this.props.data.heightOriginal}
+                    alt="gifModal" src={this.props.data.original}/></p>
+                <p className="p-url">URL: {this.props.data.original}</p>
                 <p className="p-rating"> Rating: {this.props.data.rating}</p>
                 <p className="p-date">Date: {this.props.data.date}</p>
             </Dialog>

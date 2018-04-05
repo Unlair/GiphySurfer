@@ -4,11 +4,11 @@ import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import SearchBar from './components/SearchBar';
 import Content from './components/Content'
-import SearchService from "./services/searchService";
+import GiphyService from "./services/giphyService";
 
 class App extends Component {
     state = {
-        search: new SearchService(),
+        giphyService: new GiphyService(),
         data: [],
         valueText: '',
         offset: 0
@@ -24,34 +24,33 @@ class App extends Component {
 
     componentWillUpdate(nextProps, nextState) {
         if (this.state.valueText !== nextState.valueText) {
+            this.setState({offset:0});
             this.performSearch(nextState);
         }
     }
 
-    updateText = (value) => {
+    changeText = (value) => {
         this.setState({valueText: value});
     };
 
     performSearch = debounce((nextState) => {
-        this.state.search.search(nextState.valueText, nextState.offset)
+        this.state.giphyService.request(nextState.valueText, nextState.offset)
             .then((data) => {
                 this.setState({data});
             })
     }, 500);
 
-    infiniteSearch = debounce((text, offset) => {
-        this.state.search.search(text, offset)
+    loadMore = debounce((text, offset) => {
+        this.state.giphyService.request(text, offset)
             .then((data) => {
                 this.setState({data: this.state.data.concat(data)});
             })
     }, 500);
 
     onScroll = () => {
-        if (
-            (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 1)
-        ) {
+        if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 1)) {
             this.setState({offset: this.state.offset + 30});
-            this.infiniteSearch(this.state.valueText, this.state.offset);
+            this.loadMore(this.state.valueText, this.state.offset);
         }
     };
 
@@ -60,7 +59,7 @@ class App extends Component {
             <div className="App">
                 <header className="App-header">
                     <MuiThemeProvider>
-                        <SearchBar updateText={this.updateText}/>
+                        <SearchBar changeText={this.changeText}/>
                     </MuiThemeProvider>
                 </header>
                 <div className="App-content">

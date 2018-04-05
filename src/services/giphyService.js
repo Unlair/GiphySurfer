@@ -1,9 +1,6 @@
-export default class SearchService {
-
-    search(searchValue, offset) {
-
+export default class GiphyService {
+    request(searchValue, offset) {
         return new Promise((resolve) => {
-            // let offset = 0;
             fetch('http://api.giphy.com/v1/gifs/search?q=' + searchValue + '&api_key=wZ7TY2vuJXe9lk8ngjHNI2dkpwAssmEU&limit=30&offset=' + offset)
                 .then(
                     function (response) {
@@ -11,14 +8,14 @@ export default class SearchService {
                             let gifList = data.data.map(function (pic) {
                                 return {
                                     id: pic.id,
-                                    thumbnail: pic.images.downsized.url,
-                                    full: pic.images.original.url,
+                                    preview: pic.images.preview_gif.url,
+                                    original: pic.images.original.url,
                                     rating: pic.rating,
                                     date: pic.import_datetime,
-                                    widthFull: pic.images.original.width,
-                                    heightFull: pic.images.original.height,
-                                    widthThumbnail: pic.images.downsized.width,
-                                    heightThumbnail: pic.images.downsized.height
+                                    widthOriginal: pic.images.original.width,
+                                    heightOriginal: pic.images.original.height,
+                                    widthPreview: pic.images.preview_gif.width,
+                                    heightPreview: pic.images.preview_gif.height
                                 }
                             });
                             return resolve(gifList);
