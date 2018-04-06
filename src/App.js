@@ -4,43 +4,61 @@ import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import SearchBar from './components/SearchBar';
 import Content from './components/Content'
-import SearchService from "./services/searchService";
+import GiphyService from "./services/giphyService";
 
 class App extends Component {
-
     state = {
-        search: new SearchService(),
+        giphyService: new GiphyService(),
         data: [],
-        valueText: ''
+        searchTerm: '',
+        offset: 0
     };
 
-    updateText = (value) => {
-        this.setState({valueText: value});
+    componentDidMount() {
+        window.addEventListener('scroll', this.onScroll, false);
     };
 
-    performSearch = debounce((nextState) => {
-        this.state.search.search(nextState.valueText)
-            .then((data) => {
-                this.setState({data});
-            })
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.onScroll, false);
+    };
+
+    onTextChange = debounce((_, searchTerm) => {
+        if (this.state.searchTerm !== searchTerm) {
+            this.setState({
+                searchTerm: searchTerm,
+                offset: 0,
+                data: [],
+            });
+            this.performSearch();
+        }
     }, 500);
 
-    componentWillUpdate(nextProps, nextState) {
-        if (this.state.valueText !== nextState.valueText || this.state.valueSlider !== nextState.valueSlider) {
-            this.performSearch(nextState);
+    performSearch = () => {
+        this.state.giphyService.fetchGifs(this.state.searchTerm, this.state.offset)
+            .then((data) => {
+                this.setState({
+                    data: this.state.data.concat(data),
+                });
+            });
+    };
+
+    onScroll = debounce(() => {
+        if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 1)) {
+            this.setState({offset: this.state.offset + 30});
+            this.performSearch(this.state.searchTerm, this.state.offset);
         }
-    }
+    }, 500);
 
     render() {
         return (
             <div className="App">
                 <header className="App-header">
                     <MuiThemeProvider>
-                        <SearchBar updateText={this.updateText} updateSlider={this.updateSlider}/>
+                        <SearchBar onTextChange={this.onTextChange} />
                     </MuiThemeProvider>
                 </header>
                 <div className="App-content">
-                    <Content data={this.state.data}/>
+                    <Content data={this.state.data} />
                 </div>
             </div>
         );
