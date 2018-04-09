@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './Modal.css'
+import '../styles/Modal.css'
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 

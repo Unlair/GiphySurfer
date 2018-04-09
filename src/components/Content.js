@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Masonry from 'react-masonry-component';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Modal from './Modal'
-import './Content.css'
+import '../styles/Content.css'
 
 class Content extends Component {
     constructor(props) {
