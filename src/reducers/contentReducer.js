@@ -1,7 +1,7 @@
 const initialState = {
-    selected: false
+  selected: false,
 };
 
 export default function content(state = initialState) {
-    return state;
+  return state;
 }

@@ -26,8 +26,6 @@ class App extends Component {
     onTextChange = debounce((_, searchTerm) => {
         if (this.props.searchTerm !== searchTerm) {
             this.props.searchAction.setTerm(String(searchTerm));
-            this.props.searchAction.dataReset();
-            this.props.searchAction.offsetReset();
             this.performSearch();
         }
     }, 500);
