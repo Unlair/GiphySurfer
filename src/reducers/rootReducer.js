@@ -1,8 +1,8 @@
-import {combineReducers} from 'redux';
-import search from './search';
-import content from './content';
+import {combineReducers} from 'redux'
+import searchReducer from './searchReducer'
+import contentReducer from './contentReducer'
 
 export default combineReducers({
-    search,
-    content
+    searchReducer,
+    contentReducer
 });

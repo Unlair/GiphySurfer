@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import Masonry from 'react-masonry-component';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import React, {Component} from 'react'
+import Masonry from 'react-masonry-component'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import Modal from './Modal'
 import '../styles/Content.css'
 

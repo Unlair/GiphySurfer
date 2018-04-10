@@ -1,21 +1,18 @@
-import React, {Component} from 'react';
-import debounce from 'lodash/debounce';
-import {connect} from 'react-redux';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import '../styles/App.css';
-import SearchBar from '../components/SearchBar';
-import Content from '../components/Content';
-import GiphyService from "../services/giphyService";
-import * as searchAction from '../actions/searchAction';
-import {bindActionCreators} from 'redux';
+import React, {Component} from 'react'
+import debounce from 'lodash/debounce'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import '../styles/App.css'
+import GiphyService from '../services/giphyService'
+import SearchBar from '../components/SearchBar'
+import Content from '../components/Content'
+import * as searchAction from '../actions/searchAction'
+import * as sendRequest from '../actions/requestAction'
 
 class App extends Component {
-
     state = {
-        giphyService: new GiphyService(),
-        data: [],
-        searchTerm: '',
-        offset: 0
+        giphyService: new GiphyService()
     };
 
     componentDidMount() {
@@ -27,30 +24,25 @@ class App extends Component {
     };
 
     onTextChange = debounce((_, searchTerm) => {
-
-        if (this.state.searchTerm !== searchTerm) {
-            this.setState({
-                searchTerm: searchTerm,
-                offset: 0,
-                data: [],
-            });
+        if (this.props.searchTerm !== searchTerm) {
+            this.props.searchAction.setTerm(String(searchTerm));
+            this.props.searchAction.dataReset();
+            this.props.searchAction.offsetReset();
             this.performSearch();
         }
     }, 500);
 
     performSearch = () => {
-        this.state.giphyService.fetchGifs(this.state.searchTerm, this.state.offset)
+        this.state.giphyService.fetchGifs(this.props.searchTerm, this.props.offset)
             .then((data) => {
-                this.setState({
-                    data: this.state.data.concat(data),
-                });
+                this.props.searchAction.dataUpdate(data);
             });
     };
 
     onScroll = debounce(() => {
         if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 1)) {
-            this.setState({offset: this.state.offset + 30});
-            this.performSearch(this.state.searchTerm, this.state.offset);
+            this.props.searchAction.offsetInc(30);
+            this.performSearch();
         }
     }, 500);
 
@@ -63,7 +55,7 @@ class App extends Component {
                     </MuiThemeProvider>
                 </header>
                 <div className="App-content">
-                    <Content data={this.state.data} />
+                    <Content data={this.props.data} />
                 </div>
             </div>
         );
@@ -72,16 +64,17 @@ class App extends Component {
 
 function mapStateToProps(state) {
     return {
-        searchTerm: state.search.searchTerm,
-        offset: state.search.offset,
-        data: state.content.data,
-        selected: state.content.selected
+        searchTerm: state.searchReducer.searchTerm,
+        data: state.searchReducer.data,
+        offset: state.searchReducer.offset,
+        selected: state.contentReducer.selected
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        searchAction: bindActionCreators(searchAction, dispatch)
+        searchAction: bindActionCreators(searchAction, dispatch),
+        sendRequest: bindActionCreators(sendRequest, dispatch)
     }
 }
 
