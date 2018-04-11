@@ -16,16 +16,20 @@ class Content extends Component {
     };
 
     render() {
+        const renderList = <Masonry>{this.renderList(this.props.data)}</Masonry>;
+        const noItem = <p>No items!</p>;
+
+        const renderModal = <MuiThemeProvider>
+            <Modal
+                onClose={this.props.closeModal}
+                data={this.props.selected}
+            />
+        </MuiThemeProvider>;
+
         return (
             <div className="Content">
-                {this.props.data.length ? <Masonry>{this.renderList(this.props.data)}</Masonry> : <p>No items!</p>}
-                {this.props.selected ?
-                    <MuiThemeProvider>
-                        <Modal
-                            onClose={this.props.closeModal}
-                            data={this.props.selected}
-                        />
-                    </MuiThemeProvider> : undefined}
+                {this.props.data.length ? renderList : noItem}
+                {this.props.selected ? renderModal : undefined}
             </div>
         )
     }

@@ -1,20 +1,17 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types';
 import debounce from 'lodash/debounce'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import '../styles/App.css'
-import GiphyService from '../services/giphyService'
 import SearchBar from '../components/SearchBar'
 import Content from '../components/Content'
 import * as searchAction from '../actions/searchAction'
 import * as contentAction from '../actions/contentAction'
+import * as requestAction from '../actions/requestAction'
 
 class App extends Component {
-    state = {
-        giphyService: new GiphyService()
-    };
-
     componentDidMount() {
         window.addEventListener('scroll', this.onScroll, false);
     };
@@ -25,17 +22,10 @@ class App extends Component {
 
     onTextChange = debounce((_, searchTerm) => {
         if (this.props.searchTerm !== searchTerm) {
-            this.props.searchAction.setTerm(String(searchTerm));
+            this.props.searchAction.setTerm(searchTerm);
             this.performSearch();
         }
     }, 500);
-
-    performSearch = () => {
-        this.state.giphyService.fetchGifs(this.props.searchTerm, this.props.offset)
-            .then((data) => {
-                this.props.searchAction.dataGifsUpdate(data);
-            });
-    };
 
     onScroll = debounce(() => {
         if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 1)) {
@@ -43,6 +33,10 @@ class App extends Component {
             this.performSearch();
         }
     }, 500);
+
+    performSearch = () => {
+        this.props.requestAction.fetchRequest(this.props.searchTerm, this.props.offset);
+    };
 
     render() {
         return (
@@ -77,8 +71,16 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         searchAction: bindActionCreators(searchAction, dispatch),
-        contentAction: bindActionCreators(contentAction, dispatch)
+        contentAction: bindActionCreators(contentAction, dispatch),
+        requestAction: bindActionCreators(requestAction, dispatch)
     }
 }
+
+App.propTypes = {
+    setTerm: PropTypes.string,
+    offset: PropTypes.number,
+    data: PropTypes.array
+};
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
