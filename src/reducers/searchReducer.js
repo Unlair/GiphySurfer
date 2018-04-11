@@ -13,7 +13,9 @@ const initialState = {
 export default function search(state = initialState, action) {
   switch (action.type) {
     case SET_SEARCH_TERM:
-      return { ...state, searchTerm: action.payload, data: [], offset: 0 };
+      return {
+        ...state, searchTerm: action.payload, data: [], offset: 0,
+      };
 
     case UPDATE_GIFS:
       return { ...state, data: state.data.concat(action.payload) };

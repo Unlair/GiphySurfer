@@ -8,7 +8,7 @@ import GiphyService from '../services/giphyService'
 import SearchBar from '../components/SearchBar'
 import Content from '../components/Content'
 import * as searchAction from '../actions/searchAction'
-import * as sendRequest from '../actions/requestAction'
+import * as contentAction from '../actions/contentAction'
 
 class App extends Component {
     state = {
@@ -33,7 +33,7 @@ class App extends Component {
     performSearch = () => {
         this.state.giphyService.fetchGifs(this.props.searchTerm, this.props.offset)
             .then((data) => {
-                this.props.searchAction.dataUpdate(data);
+                this.props.searchAction.dataGifsUpdate(data);
             });
     };
 
@@ -53,7 +53,12 @@ class App extends Component {
                     </MuiThemeProvider>
                 </header>
                 <div className="App-content">
-                    <Content data={this.props.data} />
+                    <Content
+                        data={this.props.data}
+                        selected={this.props.selected}
+                        openModal={this.props.contentAction.openModal}
+                        closeModal={this.props.contentAction.closeModal}
+                    />
                 </div>
             </div>
         );
@@ -72,7 +77,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         searchAction: bindActionCreators(searchAction, dispatch),
-        sendRequest: bindActionCreators(sendRequest, dispatch)
+        contentAction: bindActionCreators(contentAction, dispatch)
     }
 }
 

@@ -5,23 +5,11 @@ import Modal from './Modal'
 import '../styles/Content.css'
 
 class Content extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            selected: false,
-        };
-        this.renderModal = this.renderModal.bind(this);
-    }
-
-    renderModal = () => this.setState({selected: true});
-
-    closeModal = () => this.setState({selected: undefined});
-
     renderList = (data) => {
         return data.map((pic) => {
             return (
                 <div key={pic.id} className="gif-single">
-                    <img alt="gif" src={pic.preview} onClick={() => this.setState({selected: pic})} />
+                    <img alt="gif" src={pic.preview} onClick={() => {this.props.openModal(pic)}} />
                 </div>
             )
         })
@@ -31,11 +19,11 @@ class Content extends Component {
         return (
             <div className="Content">
                 {this.props.data.length ? <Masonry>{this.renderList(this.props.data)}</Masonry> : <p>No items!</p>}
-                {this.state.selected ?
+                {this.props.selected ?
                     <MuiThemeProvider>
                         <Modal
-                            onClose={this.closeModal}
-                            data={this.state.selected}
+                            onClose={this.props.closeModal}
+                            data={this.props.selected}
                         />
                     </MuiThemeProvider> : undefined}
             </div>
