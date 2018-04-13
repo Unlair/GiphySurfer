@@ -11,6 +11,19 @@
 }
 
 .text-field {
+    width: 65% !important;
     margin-top: 25px;
-    width: 50% !important;
+}
+
+@media screen and (min-width: 320px) and (max-width: 640px) {
+    .paper {
+        width: 100% !important;
+        height: 50px !important;
+        margin: 0 !important;
+    }
+
+    .text-field {
+        width: 90% !important;
+        margin-top: 0;
+    }
 }

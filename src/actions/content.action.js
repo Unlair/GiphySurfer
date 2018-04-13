@@ -1,7 +1,7 @@
 import {
   OPEN_MODAL,
   CLOSE_MODAL,
-} from '../constants/сontentConst';
+} from '../constants/сontent.constant';
 
 export function openModal(pic) {
   return {

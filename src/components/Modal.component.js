@@ -19,6 +19,7 @@ export default class Modal extends Component {
                 title="Details"
                 actions={actions}
                 modal={false}
+                style={{display: this.props.hidden}}
                 open={true}
                 onRequestClose={this.props.onClose}
             >

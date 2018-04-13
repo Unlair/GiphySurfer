@@ -5,15 +5,16 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import '../styles/App.css'
-import SearchBar from '../components/SearchBar'
-import Content from '../components/Content'
-import * as searchAction from '../actions/searchAction'
-import * as contentAction from '../actions/contentAction'
-import * as requestAction from '../actions/requestAction'
+import SearchBar from '../components/SearchBar.component'
+import Content from '../components/Content.component'
+import * as searchAction from '../actions/search.action'
+import * as contentAction from '../actions/content.action'
+import * as requestAction from '../actions/request.action'
 
 class App extends Component {
     componentDidMount() {
         window.addEventListener('scroll', this.onScroll, false);
+        this.performSearch();
     };
 
     componentWillUnmount() {
@@ -35,7 +36,7 @@ class App extends Component {
     }, 500);
 
     performSearch = () => {
-        this.props.requestAction.fetchRequest(this.props.searchTerm, this.props.offset);
+        this.props.requestAction.fetchGifs(this.props.searchTerm, this.props.offset);
     };
 
     render() {

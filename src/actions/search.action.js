@@ -2,7 +2,7 @@ import {
   SET_SEARCH_TERM,
   UPDATE_GIFS,
   OFFSET_INC,
-} from '../constants/searchConst';
+} from '../constants/search.constant';
 
 export function setTerm(searchTerm) {
   return {
@@ -11,7 +11,7 @@ export function setTerm(searchTerm) {
   };
 }
 
-export function dataGifsUpdate(data) {
+export function updateGifs(data) {
   return {
     type: UPDATE_GIFS,
     payload: data,
