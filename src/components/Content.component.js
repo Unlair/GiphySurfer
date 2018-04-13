@@ -4,6 +4,22 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import Modal from './Modal.component'
 import '../styles/Content.css'
 
+function ModalWindow (props) {
+    const selected = props.selected;
+    const action = props.action;
+
+    if (selected) {
+        return <MuiThemeProvider>
+            <Modal
+                onClose={action}
+                data={selected}
+            />
+        </MuiThemeProvider>
+    } else {
+        return <div>{null}</div>
+    }
+}
+
 class Content extends Component {
     renderList = (data) => {
         return data.map((pic) => {
@@ -19,20 +35,12 @@ class Content extends Component {
         const renderList = <Masonry>{this.renderList(this.props.data)}</Masonry>;
         const noItem = <p>No items!</p>;
 
-        const renderModal = <MuiThemeProvider>
-            <Modal
-                onClose={this.props.closeModal}
-                data={this.props.selected}
-            />
-        </MuiThemeProvider>;
-
         return (
             <div className="Content">
                 {this.props.data.length ? renderList : noItem}
-                {this.props.selected ? renderModal : undefined}
+                <ModalWindow selected={this.props.selected} action={this.props.closeModal} />
             </div>
         )
     }
 }
-
 export default Content;
