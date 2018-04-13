@@ -21,7 +21,6 @@ class Content extends Component {
 
         const renderModal = <MuiThemeProvider>
             <Modal
-                hidden={this.props.selected ? 'block' : 'none'}
                 onClose={this.props.closeModal}
                 data={this.props.selected}
             />
@@ -30,7 +29,7 @@ class Content extends Component {
         return (
             <div className="Content">
                 {this.props.data.length ? renderList : noItem}
-                {renderModal}
+                {this.props.selected ? renderModal : undefined}
             </div>
         )
     }
