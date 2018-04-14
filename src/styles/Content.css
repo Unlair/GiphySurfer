@@ -3,11 +3,12 @@
     max-width: 90%;
 }
 
-.App-content p {
-    text-align: center;
-}
+/*.App-content h1 {*/
+    /*text-align: center;*/
+/*}*/
 
 .Content {
+    text-align: center;
     margin: auto;
 }
 

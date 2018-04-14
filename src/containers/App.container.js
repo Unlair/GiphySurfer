@@ -49,6 +49,7 @@ class App extends Component {
                 </header>
                 <div className="App-content">
                     <Content
+                        isLoading={this.props.isLoading}
                         data={this.props.data}
                         selected={this.props.selected}
                         openModal={this.props.contentAction.openModal}
@@ -63,6 +64,7 @@ class App extends Component {
 function mapStateToProps(state) {
     return {
         searchTerm: state.searchReducer.searchTerm,
+        isLoading: state.searchReducer.isLoading,
         data: state.searchReducer.data,
         offset: state.searchReducer.offset,
         selected: state.contentReducer.selected
