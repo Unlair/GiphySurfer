@@ -1,8 +1,7 @@
-import React, {Component} from 'react';
-import debounce from 'lodash/debounce'
-import Paper from 'material-ui/Paper';
-import TextField from 'material-ui/TextField';
-import './SearchBar.css'
+import React, {Component} from 'react'
+import Paper from 'material-ui/Paper'
+import TextField from 'material-ui/TextField'
+import '../styles/SearchBar.css'
 
 class SearchBar extends Component {
     render() {
