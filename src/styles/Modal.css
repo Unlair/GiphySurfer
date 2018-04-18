@@ -1,13 +1,35 @@
 .dialog p,
 .dialog h3 {
     text-align: center;
+    word-break: break-all;
 }
 
 .dialog .p-rating {
     text-transform: capitalize;
 }
 
-.dialog p > img {
-    max-width: 700px;
-    max-height: 500px;
+.dialog img {
+    display: block;
+    margin: auto;
+}
+
+@media screen and (min-width: 1024px) and (max-width: 2048px){
+    .dialog img {
+        width: 500px;
+        height: 500px;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px){
+    .dialog img {
+        width: 400px;
+        height: 400px;
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px){
+    .dialog img {
+        width: 180px;
+        height: 180px;
+    }
 }
