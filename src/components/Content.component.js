@@ -34,9 +34,32 @@ function ModalWindow (props) {
 class Content extends Component {
     renderList = (data) => {
         return data.map((pic) => {
+            const getHeightWrapper = (pic) => {
+                if (typeof pic.preview === 'undefined') {
+                    const widthWrapper = pic.widthOriginal / 300;
+                    return pic.heightOriginal / widthWrapper;
+                } else {
+                    const widthWrapper = pic.widthPreview / 300;
+                    return pic.heightPreview / widthWrapper;
+                }
+            };
+
+            const wrapperStyle = {
+                height: getHeightWrapper(pic),
+                backgroundColor: '#' +  Math.random().toString(16).substr(-6),
+            };
+
+            const srcGif = (pic) => {
+                if (typeof pic.preview === 'undefined') {
+                    return pic.original;
+                } else {
+                    return pic.preview;
+                }
+            };
+
             return (
-                <div key={pic.id} className="gif-single">
-                    <img alt="gif" src={pic.preview} onClick={() => {this.props.openModal(pic)}} />
+                <div style={wrapperStyle} key={pic.id} className="gif-wrapper">
+                    <img alt="gif" src={srcGif(pic)} onClick={() => {this.props.openModal(pic)}} />
                 </div>
             )
         })
