@@ -4,7 +4,6 @@ import debounce from 'lodash/debounce'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import '../styles/App.css'
 import SearchBar from '../components/SearchBar.component'
 import Content from '../components/Content.component'
 import * as searchAction from '../actions/search.action'
@@ -84,6 +83,5 @@ App.propTypes = {
     offset: PropTypes.number,
     data: PropTypes.array
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
