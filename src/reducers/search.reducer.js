@@ -1,5 +1,6 @@
 import {
   SET_SEARCH_TERM,
+  SET_LOADING,
   UPDATE_GIFS,
   OFFSET_INC,
 } from '../constants/search.constant';
@@ -8,6 +9,7 @@ const initialState = {
   searchTerm: '',
   offset: 0,
   data: [],
+  isLoading: false,
 };
 
 export default function search(state = initialState, action) {
@@ -18,6 +20,12 @@ export default function search(state = initialState, action) {
         searchTerm: action.payload,
         data: [],
         offset: 0,
+      };
+
+    case SET_LOADING:
+      return {
+        ...state,
+        isLoading: action.payload,
       };
 
     case UPDATE_GIFS:

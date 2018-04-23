@@ -4,7 +4,6 @@ import debounce from 'lodash/debounce'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import '../styles/App.css'
 import SearchBar from '../components/SearchBar.component'
 import Content from '../components/Content.component'
 import * as searchAction from '../actions/search.action'
@@ -49,6 +48,7 @@ class App extends Component {
                 </header>
                 <div className="App-content">
                     <Content
+                        isLoading={this.props.isLoading}
                         data={this.props.data}
                         selected={this.props.selected}
                         openModal={this.props.contentAction.openModal}
@@ -63,6 +63,7 @@ class App extends Component {
 function mapStateToProps(state) {
     return {
         searchTerm: state.searchReducer.searchTerm,
+        isLoading: state.searchReducer.isLoading,
         data: state.searchReducer.data,
         offset: state.searchReducer.offset,
         selected: state.contentReducer.selected
@@ -82,6 +83,5 @@ App.propTypes = {
     offset: PropTypes.number,
     data: PropTypes.array
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
