@@ -1,0 +1,7 @@
+.Gif {
+    margin: 2px;
+}
+
+.Gif > img {
+    width: 300px;
+}

@@ -15,7 +15,7 @@ export default class Modal extends Component {
 
         return (
             <Dialog
-                className="dialog"
+                className="Modal"
                 title="Details"
                 actions={actions}
                 modal={false}
@@ -29,9 +29,9 @@ export default class Modal extends Component {
                     alt="gifModal" src={this.props.data.original}
                 />
 
-                <p className="p-url">URL: {this.props.data.original}</p>
-                <p className="p-rating"> Rating: {this.props.data.rating}</p>
-                <p className="p-date">Date: {this.props.data.date}</p>
+                <p className="url">URL: {this.props.data.original}</p>
+                <p className="rating"> Rating: {this.props.data.rating}</p>
+                <p className="date">Date: {this.props.data.date}</p>
             </Dialog>
         );
     }
