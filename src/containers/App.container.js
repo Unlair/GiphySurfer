@@ -36,13 +36,17 @@ class App extends Component {
     }, 500);
 
     setRecentSearch = (searchTerm) => {
+        const recentTermsList = this.props.recentTerms;
+
         if (searchTerm !== '') {
+            if (recentTermsList.length == 10) {
+                recentTermsList.shift();
+            }
             this.props.searchAction.setRecentSearch(searchTerm);
         }
     };
 
     performSearch = () => {
-        console.log(this.props.searchTerm);
         this.props.requestAction.fetchGifs(this.props.searchTerm, this.props.offset);
     };
 
@@ -55,7 +59,7 @@ class App extends Component {
                             onTextChange={this.onTextChange}
                             recentTerms={this.props.recentTerms}
                             setTerm={this.props.searchAction.setTerm}
-                            performSearch={this.performSearch}
+                            fetchGifs={this.props.requestAction.fetchGifs}
                         />
                     </MuiThemeProvider>
                 </header>

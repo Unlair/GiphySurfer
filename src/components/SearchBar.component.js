@@ -12,7 +12,7 @@ class SearchBar extends Component {
                     key={index}
                     term={term}
                     setTerm={this.props.setTerm}
-                    performSearch={this.props.performSearch}
+                    fetchGifs={this.props.fetchGifs}
                 />
             )
         })
