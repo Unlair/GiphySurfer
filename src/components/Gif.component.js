@@ -16,7 +16,7 @@ class Gif extends Component {
         backgroundColor: this.getRandomColor(),
     };
 
-    srcGif = (pic) => {
+    getGifSource = (pic) => {
         return ( typeof pic.preview === 'undefined' ? pic.original : pic.preview );
     };
 
@@ -24,8 +24,7 @@ class Gif extends Component {
         return (
             <div style={this.wrapperStyle} className="Gif">
                 <img
-                    alt="gif"
-                    src={this.srcGif(this.props.pic)}
+                    src={this.getGifSource(this.props.pic)}
                     onClick={() => {this.props.openModal(this.props.pic)}}
                 />
             </div>

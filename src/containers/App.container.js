@@ -38,14 +38,14 @@ class App extends Component {
     setRecentSearch = (searchTerm) => {
         if (searchTerm !== '') {
             const recentTermsList = this.props.recentTerms;
-            const find = (array, value) => {
+            const findSame = (array, value) => {
                 for (let i = 0; i < array.length; i++) {
                     if (array[i] === value) array.splice(i, 1);
                 }
                 if (array.length === 10) array.shift();
             };
 
-            find(recentTermsList, searchTerm);
+            findSame(recentTermsList, searchTerm);
             this.props.searchAction.setRecentSearch(searchTerm);
         }
     };
