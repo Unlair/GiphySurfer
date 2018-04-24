@@ -23,6 +23,7 @@ class App extends Component {
     onTextChange = debounce((_, searchTerm) => {
         if (this.props.searchTerm !== searchTerm) {
             this.props.searchAction.setTerm(searchTerm);
+            this.setRecentSearch(searchTerm);
             this.performSearch();
         }
     }, 500);
@@ -34,6 +35,21 @@ class App extends Component {
         }
     }, 500);
 
+    setRecentSearch = (searchTerm) => {
+        if (searchTerm !== '') {
+            const recentTermsList = this.props.recentTerms;
+            const findSame = (array, value) => {
+                for (let i = 0; i < array.length; i++) {
+                    if (array[i] === value) array.splice(i, 1);
+                }
+                if (array.length === 10) array.shift();
+            };
+
+            findSame(recentTermsList, searchTerm);
+            this.props.searchAction.setRecentSearch(searchTerm);
+        }
+    };
+
     performSearch = () => {
         this.props.requestAction.fetchGifs(this.props.searchTerm, this.props.offset);
     };
@@ -43,7 +59,12 @@ class App extends Component {
             <div className="App">
                 <header className="App-header">
                     <MuiThemeProvider>
-                        <SearchBar onTextChange={this.onTextChange} />
+                        <SearchBar
+                            onTextChange={this.onTextChange}
+                            recentTerms={this.props.recentTerms}
+                            setTerm={this.props.searchAction.setTerm}
+                            fetchGifs={this.props.requestAction.fetchGifs}
+                        />
                     </MuiThemeProvider>
                 </header>
                 <div className="App-content">
@@ -66,7 +87,8 @@ function mapStateToProps(state) {
         isLoading: state.searchReducer.isLoading,
         data: state.searchReducer.data,
         offset: state.searchReducer.offset,
-        selected: state.contentReducer.selected
+        recentTerms: state.searchReducer.recentTerms,
+        selected: state.contentReducer.selected,
     }
 }
 

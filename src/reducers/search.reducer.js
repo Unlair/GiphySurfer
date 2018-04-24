@@ -3,12 +3,14 @@ import {
   SET_LOADING,
   UPDATE_GIFS,
   OFFSET_INC,
+  SET_RECENT_SEARCH,
 } from '../constants/search.constant';
 
 const initialState = {
   searchTerm: '',
   offset: 0,
   data: [],
+  recentTerms: ['cat', 'car', 'privet'],
   isLoading: false,
 };
 
@@ -20,6 +22,12 @@ export default function search(state = initialState, action) {
         searchTerm: action.payload,
         data: [],
         offset: 0,
+      };
+
+    case SET_RECENT_SEARCH:
+      return {
+        ...state,
+        recentTerms: state.recentTerms.concat(action.payload),
       };
 
     case SET_LOADING:

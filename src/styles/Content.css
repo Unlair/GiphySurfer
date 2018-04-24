@@ -8,14 +8,6 @@
     margin: auto;
 }
 
-.gif-wrapper {
-    margin: 2px;
-}
-
-.gif-wrapper > img {
-    width: 300px;
-}
-
 @media screen and (min-width: 1920px) and (max-width: 2048px){
     .App-content {
         max-width: 1824px;

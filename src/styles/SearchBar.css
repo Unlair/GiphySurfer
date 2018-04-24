@@ -1,4 +1,4 @@
-.search-bar {
+.SearchBar {
     text-align: center;
 }
 
@@ -12,7 +12,7 @@
 
 .text-field {
     width: 65% !important;
-    margin-top: 25px;
+    margin-top: 10px;
 }
 
 @media screen and (min-width: 320px) and (max-width: 640px) {
@@ -25,5 +25,17 @@
     .text-field {
         width: 90% !important;
         margin-top: 0;
+    }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1370px) {
+    .paper {
+        height: 135px !important;
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width: 1023px) {
+    .Label {
+        display: none;
     }
 }

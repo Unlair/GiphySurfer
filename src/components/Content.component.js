@@ -9,9 +9,11 @@ import '../styles/Content.css'
 function Spinner (props) {
     const isLoading = props.isLoading;
     if (isLoading) {
-        return <MuiThemeProvider>
-            <CircularProgress />
-        </MuiThemeProvider>
+        return (
+            <MuiThemeProvider>
+                <CircularProgress />
+            </MuiThemeProvider>
+        )
     } else {
         return <h1>No items!</h1>
     }
@@ -21,12 +23,14 @@ function ModalWindow (props) {
     const selected = props.selected;
     const action = props.action;
     if (selected) {
-        return <MuiThemeProvider>
-            <Modal
-                onClose={action}
-                data={selected}
-            />
-        </MuiThemeProvider>
+        return (
+            <MuiThemeProvider>
+                <Modal
+                    onClose={action}
+                    data={selected}
+                />
+            </MuiThemeProvider>
+        )
     } else {
         return <div>{null}</div>
     }
