@@ -8,11 +8,19 @@ class Label extends Component {
         this.props.fetchGifs(this.props.term, 0);
     };
 
+    shortenString = (term) => {
+        if (term.length > 13) {
+            return term.substring(0, 5) + '...' + term.substring(term.length - 5);
+        } else {
+            return term;
+        }
+    };
+
     render() {
         return (
             <div className="Label">
                 <Chip onClick={this.onLabelClick}>
-                    {this.props.term}
+                    {this.shortenString(this.props.term)}
                 </Chip>
             </div>
         )
