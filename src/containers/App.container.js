@@ -36,12 +36,16 @@ class App extends Component {
     }, 500);
 
     setRecentSearch = (searchTerm) => {
-        const recentTermsList = this.props.recentTerms;
-
         if (searchTerm !== '') {
-            if (recentTermsList.length == 10) {
-                recentTermsList.shift();
-            }
+            const recentTermsList = this.props.recentTerms;
+            const find = (array, value) => {
+                for (let i = 0; i < array.length; i++) {
+                    if (array[i] === value) array.splice(i, 1);
+                }
+                if (array.length === 10) array.shift();
+            };
+
+            find(recentTermsList, searchTerm);
             this.props.searchAction.setRecentSearch(searchTerm);
         }
     };
