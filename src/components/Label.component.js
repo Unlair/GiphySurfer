@@ -9,8 +9,8 @@ class Label extends Component {
     };
 
     shortenString = (term) => {
-        if (term.length > 13) {
-            return term.substring(0, 5) + '...' + term.substring(term.length - 5);
+        if (term.length > 9) {
+            return term.substring(0, 3) + '...' + term.substring(term.length - 3);
         } else {
             return term;
         }
