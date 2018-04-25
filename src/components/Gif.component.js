@@ -24,6 +24,7 @@ class Gif extends Component {
         return (
             <div style={this.wrapperStyle} className="Gif">
                 <img
+                    alt="Another one gif"
                     src={this.getGifSource(this.props.pic)}
                     onClick={() => {this.props.openModal(this.props.pic)}}
                 />

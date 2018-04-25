@@ -7,16 +7,18 @@ import {
 } from '../constants/search.constant';
 
 export function setTerm(searchTerm) {
-  return {
-    type: SET_SEARCH_TERM,
-    payload: searchTerm,
-  };
-}
+  return (dispatch) => {
+    dispatch({
+      type: SET_SEARCH_TERM,
+      payload: searchTerm,
+    });
 
-export function setRecentSearch(searchTerm) {
-  return {
-    type: SET_RECENT_SEARCH,
-    payload: searchTerm,
+    // TODO: проверка на совпадения, удаление последнего элемента
+
+    dispatch({
+      type: SET_RECENT_SEARCH,
+      payload: searchTerm,
+    });
   };
 }
 
@@ -28,9 +30,16 @@ export function setLoading(isLoading) {
 }
 
 export function updateGifs(data) {
-  return {
-    type: UPDATE_GIFS,
-    payload: data,
+  return (dispatch) => {
+    dispatch({
+      type: UPDATE_GIFS,
+      payload: data,
+    });
+
+    dispatch({
+      type: SET_LOADING,
+      payload: false,
+    });
   };
 }
 

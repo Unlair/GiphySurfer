@@ -13,7 +13,7 @@ export default class Modal extends Component {
             />
         ];
 
-        return (
+        const modal = (
             <Dialog
                 className="Modal"
                 title="Details"
@@ -34,5 +34,11 @@ export default class Modal extends Component {
                 <p className="date">Date: {this.props.data.date}</p>
             </Dialog>
         );
+
+        if (this.props.selected) {
+            return modal
+        } else {
+            return <div>{null}</div>
+        }
     }
 }
