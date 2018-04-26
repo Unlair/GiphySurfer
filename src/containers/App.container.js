@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import SearchBar from './SearchBar.container'
@@ -23,6 +24,23 @@ class App extends Component {
     }
 }
 
-//TODO: PropTypes
+function mapStateToProps(state) {
+    return {
+        searchTerm: state.searchReducer.searchTerm,
+        offset: state.searchReducer.offset,
+        data: state.searchReducer.data,
+        recentTerms: state.searchReducer.recentTerms,
+        isLoading: state.searchReducer.isLoading,
+        selected: state.contentReducer.selected,
+    }
+}
 
-export default connect()(App);
+App.propTypes = {
+    setTerm: PropTypes.string,
+    offset: PropTypes.number,
+    data: PropTypes.array,
+    recentTerms: PropTypes.array,
+    isLoading: PropTypes.bool
+};
+
+export default connect(mapStateToProps)(App);

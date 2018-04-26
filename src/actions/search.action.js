@@ -13,12 +13,12 @@ export function setTerm(searchTerm) {
       payload: searchTerm,
     });
 
-    // TODO: проверка на совпадения, удаление последнего элемента
-
-    dispatch({
-      type: SET_RECENT_SEARCH,
-      payload: searchTerm,
-    });
+    if (searchTerm !== '') {
+      dispatch({
+        type: SET_RECENT_SEARCH,
+        payload: searchTerm,
+      });
+    }
   };
 }
 

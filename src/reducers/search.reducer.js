@@ -25,6 +25,16 @@ export default function search(state = initialState, action) {
       };
 
     case SET_RECENT_SEARCH:
+      state.recentTerms.forEach((item, index) => {
+        if (state.recentTerms[index] === action.payload) {
+          state.recentTerms.splice(index, 1);
+        }
+      });
+
+      if (state.recentTerms.length > 9) {
+        state.recentTerms.shift();
+      }
+
       return {
         ...state,
         recentTerms: state.recentTerms.concat(action.payload),

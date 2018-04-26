@@ -63,6 +63,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-//TODO: PropTypes
-
 export default connect(mapStateToProps, mapDispatchToProps)(Content);
