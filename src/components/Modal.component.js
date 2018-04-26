@@ -4,7 +4,21 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 
 export default class Modal extends Component {
+    getHeightGif = () => {
+        if (window.innerWidth < 768) {
+            const widthGifModal = this.props.data.widthOriginal / 190;
+            return this.props.data.heightOriginal / widthGifModal;
+        } else {
+            const widthGifModal = this.props.data.widthOriginal / 500;
+            return this.props.data.heightOriginal / widthGifModal;
+        }
+    };
+
     render() {
+        const styleGifModal = {
+          height: this.getHeightGif(),
+        };
+
         const actions = [
             <FlatButton
                 label="Ok"
@@ -24,8 +38,7 @@ export default class Modal extends Component {
                 autoScrollBodyContent={true}
             >
                 <img
-                    width={this.props.data.widthOriginal}
-                    height={this.props.data.heightOriginal}
+                    style={styleGifModal}
                     alt="gifModal" src={this.props.data.original}
                 />
 
@@ -35,10 +48,10 @@ export default class Modal extends Component {
             </Dialog>
         );
 
-        if (this.props.selected) {
-            return modal
-        } else {
-            return <div>{null}</div>
-        }
+        return(
+            <div>
+                {this.props.data ? modal : <div>{null}</div>}
+            </div>
+        );
     }
 }

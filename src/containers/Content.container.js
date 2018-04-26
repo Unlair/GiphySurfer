@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import debounce from 'lodash/debounce'
-import * as searchAction from '../actions/search.action'
 import * as contentAction from '../actions/content.action'
 import * as requestAction from '../actions/request.action'
 import Masonry from 'react-masonry-component'
@@ -30,7 +29,7 @@ class Content extends Component {
     renderList = (data) => {
         return data.map((pic) => {
             return (
-                <Gif pic={pic} key={pic.id} openModal={this.props.openModal} />
+                <Gif pic={pic} key={pic.id} openModal={this.props.contentAction.openModal} />
             )
         })
     };
@@ -41,7 +40,7 @@ class Content extends Component {
         return (
             <div className="Content">
                 {this.props.data.length ? renderList : <Spinner isLoading={this.props.isLoading} />}
-                <Modal data={this.props.selected}/>
+                <Modal data={this.props.selected} onClose={this.props.contentAction.closeModal} />
             </div>
         )
     }
@@ -53,16 +52,14 @@ function mapStateToProps(state) {
         isLoading: state.searchReducer.isLoading,
         data: state.searchReducer.data,
         offset: state.searchReducer.offset,
-        recentTerms: state.searchReducer.recentTerms,
         selected: state.contentReducer.selected,
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        searchAction: bindActionCreators(searchAction, dispatch),
         contentAction: bindActionCreators(contentAction, dispatch),
-        requestAction: bindActionCreators(requestAction, dispatch)
+        requestAction: bindActionCreators(requestAction, dispatch),
     }
 }
 
