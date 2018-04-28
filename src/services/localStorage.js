@@ -2,11 +2,11 @@ export const loadRecentTerms = () => {
   try {
     const serializedState = localStorage.getItem('terms');
     if (serializedState === null) {
-      return undefined;
+      return [];
     }
     return JSON.parse(serializedState);
   } catch (err) {
-    return undefined;
+    console.log(err);
   }
 };
 
