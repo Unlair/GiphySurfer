@@ -5,12 +5,13 @@ import {
   OFFSET_INC,
   SET_RECENT_SEARCH,
 } from '../constants/search.constant';
+import { loadRecentTerms } from '../services/localStorage';
 
 const initialState = {
   searchTerm: '',
   offset: 0,
   data: [],
-  recentTerms: ['cat', 'car', 'privet'],
+  recentTerms: loadRecentTerms(),
   isLoading: false,
 };
 
