@@ -21,6 +21,12 @@ export default class Modal extends Component {
 
         const actions = [
             <FlatButton
+                href={'https://telegram.me/share/url?url=' + this.props.data.original}
+                target="_blank"
+                label="Share"
+                secondary={true}
+            />,
+            <FlatButton
                 label="Ok"
                 primary={true}
                 onClick={this.props.onClose}
