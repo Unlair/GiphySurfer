@@ -23,7 +23,7 @@ function Labels (props) {
 }
 
 class SearchBar extends Component {
-    state ={
+    state = {
         searchTerm: '',
     };
 

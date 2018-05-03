@@ -15,13 +15,15 @@ export default class Modal extends Component {
     };
 
     render() {
+        const shareUrl = 'https://telegram.me/share/url?url=' + this.props.data.original;
+
         const styleGifModal = {
           height: this.getHeightGif(),
         };
 
         const actions = [
             <FlatButton
-                href={'https://telegram.me/share/url?url=' + this.props.data.original}
+                href={shareUrl}
                 target="_blank"
                 label="Share"
                 secondary={true}
