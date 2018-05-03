@@ -13,23 +13,18 @@
     margin: auto;
 }
 
-@media screen and (min-width: 1024px) and (max-width: 2048px){
-    .Modal img {
-        width: 500px;
-        height: 500px;
-    }
+.Modal a {
+    float: left;
 }
 
-@media screen and (min-width: 768px) and (max-width: 1023px){
+@media screen and (min-width: 768px) and (max-width: 2048px){
     .Modal img {
-        width: 400px;
-        height: 400px;
+        width: 500px;
     }
 }
 
 @media screen and (min-width: 320px) and (max-width: 767px){
     .Modal img {
-        width: 180px;
-        height: 180px;
+        width: 190px;
     }
 }

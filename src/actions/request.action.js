@@ -6,23 +6,15 @@ const giphyService = new GiphyService();
 export function fetchGifs(searchTerm, offset) {
   return (dispatch) => {
     dispatch(searchAction.setLoading(true));
-
+    let promise;
     if (searchTerm === '') {
-      giphyService.fetchTrendingGifs(offset)
-        .then((data) => {
-          dispatch(searchAction.updateGifs(data));
-        })
-        .then(() => {
-          dispatch(searchAction.setLoading(false));
-        });
+      promise = giphyService.fetchTrendingGifs(offset);
     } else {
-      giphyService.fetchGifsByTerm(searchTerm, offset)
-        .then((data) => {
-          dispatch(searchAction.updateGifs(data));
-        })
-        .then(() => {
-          dispatch(searchAction.setLoading(false));
-        });
+      promise = giphyService.fetchGifsByTerm(searchTerm, offset);
     }
+    promise.then((data) => {
+      dispatch(searchAction.offsetInc(30));
+      dispatch(searchAction.updateGifs(data));
+    });
   };
 }

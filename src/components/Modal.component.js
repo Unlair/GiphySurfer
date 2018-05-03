@@ -4,8 +4,30 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 
 export default class Modal extends Component {
+    getHeightGif = () => {
+        if (window.innerWidth < 768) {
+            const widthGifModal = this.props.data.widthOriginal / 190;
+            return this.props.data.heightOriginal / widthGifModal;
+        } else {
+            const widthGifModal = this.props.data.widthOriginal / 500;
+            return this.props.data.heightOriginal / widthGifModal;
+        }
+    };
+
     render() {
+        const shareUrl = 'https://telegram.me/share/url?url=' + this.props.data.original;
+
+        const styleGifModal = {
+          height: this.getHeightGif(),
+        };
+
         const actions = [
+            <FlatButton
+                href={shareUrl}
+                target="_blank"
+                label="Share"
+                secondary={true}
+            />,
             <FlatButton
                 label="Ok"
                 primary={true}
@@ -13,7 +35,7 @@ export default class Modal extends Component {
             />
         ];
 
-        return (
+        const modal = (
             <Dialog
                 className="Modal"
                 title="Details"
@@ -24,8 +46,7 @@ export default class Modal extends Component {
                 autoScrollBodyContent={true}
             >
                 <img
-                    width={this.props.data.widthOriginal}
-                    height={this.props.data.heightOriginal}
+                    style={styleGifModal}
                     alt="gifModal" src={this.props.data.original}
                 />
 
@@ -33,6 +54,12 @@ export default class Modal extends Component {
                 <p className="rating"> Rating: {this.props.data.rating}</p>
                 <p className="date">Date: {this.props.data.date}</p>
             </Dialog>
+        );
+
+        return(
+            <div>
+                {this.props.data ? modal : <div>{null}</div>}
+            </div>
         );
     }
 }

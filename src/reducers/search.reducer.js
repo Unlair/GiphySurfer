@@ -5,12 +5,13 @@ import {
   OFFSET_INC,
   SET_RECENT_SEARCH,
 } from '../constants/search.constant';
+import { loadRecentTerms } from '../services/localStorage';
 
 const initialState = {
   searchTerm: '',
   offset: 0,
   data: [],
-  recentTerms: ['cat', 'car', 'privet'],
+  recentTerms: loadRecentTerms(),
   isLoading: false,
 };
 
@@ -25,9 +26,19 @@ export default function search(state = initialState, action) {
       };
 
     case SET_RECENT_SEARCH:
+      state.recentTerms.forEach((item, index) => {
+        if (state.recentTerms[index] === action.payload) {
+          state.recentTerms.splice(index, 1);
+        }
+      });
+
+      if (state.recentTerms.length > 9) {
+        state.recentTerms.pop();
+      }
+
       return {
         ...state,
-        recentTerms: state.recentTerms.concat(action.payload),
+        recentTerms: [action.payload].concat(state.recentTerms),
       };
 
     case SET_LOADING:

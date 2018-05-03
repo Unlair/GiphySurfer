@@ -3,14 +3,13 @@ import Chip from 'material-ui/Chip'
 import '../styles/Label.css'
 
 class Label extends Component {
-    onLabelClick = () => {
-        this.props.setTerm(this.props.term);
-        this.props.fetchGifs(this.props.term, 0);
+    onLabelClick = (_) => {
+        this.props.onTextChange(_, this.props.term);
     };
 
     shortenString = (term) => {
         if (term.length > 9) {
-            return term.substring(0, 3) + '...' + term.substring(term.length - 3);
+            return term.slice(0,3) + '...' + term.slice(-3);
         } else {
             return term;
         }
