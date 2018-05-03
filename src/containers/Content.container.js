@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import debounce from 'lodash/debounce'
+import { v4 } from 'node-uuid'
 import * as contentAction from '../actions/content.action'
 import * as requestAction from '../actions/request.action'
 import Masonry from 'react-masonry-component'
@@ -29,7 +30,7 @@ class Content extends Component {
     renderList = (data) => {
         return data.map((pic) => {
             return (
-                <Gif pic={pic} key={pic.id} openModal={this.props.contentAction.openModal} />
+                <Gif pic={pic} key={v4()} openModal={this.props.contentAction.openModal} />
             )
         })
     };

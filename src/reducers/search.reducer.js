@@ -33,12 +33,12 @@ export default function search(state = initialState, action) {
       });
 
       if (state.recentTerms.length > 9) {
-        state.recentTerms.shift();
+        state.recentTerms.pop();
       }
 
       return {
         ...state,
-        recentTerms: state.recentTerms.concat(action.payload),
+        recentTerms: [action.payload].concat(state.recentTerms),
       };
 
     case SET_LOADING:

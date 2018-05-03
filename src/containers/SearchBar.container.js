@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import debounce from 'lodash/debounce'
+import { v4 } from 'node-uuid'
 import * as searchAction from '../actions/search.action'
 import * as requestAction from '../actions/request.action'
 import Paper from 'material-ui/Paper'
@@ -11,10 +12,10 @@ import '../styles/SearchBar.css'
 
 function Labels (props) {
     const terms = props.recentTerms;
-    return terms.map((term, index) => {
+    return terms.map((term) => {
         return (
             <Label
-                key={index}
+                key={v4()}
                 term={term}
                 onTextChange={props.onTextChange}
             />
